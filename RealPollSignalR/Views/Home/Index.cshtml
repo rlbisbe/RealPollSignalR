@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Votes";
+}
+
+@section scripts {
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/Controller/mainController.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+}
+
+<div class="row" ng-app="myApp" ng-controller="mainController" ng-init="init()">
+    <div class="col-md-8">
+        <h2>Receiving votes..</h2>
+        <p id="countdown">{{countdown}}</p>
+        <ul>
+            <li ng-repeat="answer in answers">
+                <p>{{answer.val}}</p>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h2>Chart</h2>
+    </div>
+</div>
