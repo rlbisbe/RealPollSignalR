@@ -8,9 +8,9 @@ namespace RealPollSignalR
 {
     public class Poll : Hub
     {
-        public void Vote(int option)
+        public void Vote(string name, int questionId, int option)
         {
-            Clients.All.castVote(option);
+            Clients.All.castVote(name, questionId, option);
         }
     }
 }

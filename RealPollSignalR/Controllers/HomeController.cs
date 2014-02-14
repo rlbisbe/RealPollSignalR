@@ -17,9 +17,10 @@ namespace RealPollSignalR.Controllers
             repository = new FakeQuestionRepository();
         }
 
-        public ActionResult Index()
+        public ActionResult Result(int id)
         {
-            return View();
+            var question = repository.GetFromId(id);
+            return View(question);
         }
 
         public ActionResult Vote(int id)

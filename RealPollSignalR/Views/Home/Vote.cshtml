@@ -7,11 +7,12 @@
     <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>
+        var questionId = '@Model.QuestionId'
         $(function () {
             var poll = $.connection.poll;
             $.connection.hub.start().done(function () {
                 $('button').click(function () {
-                    poll.server.vote($(this).val());
+                    poll.server.vote($("#name").val(), questionId, $(this).val());
                 });
             });
         });
@@ -22,9 +23,11 @@
     <div class="col-md-4">
         <h2>@Html.DisplayFor(m => m.QuestionText)</h2>
     </div>
+    <label for="name">Name:</label>
+    <input type="text" required id="name"/>
     @foreach (var item in Model.Answers)
     {
-        <button value="@item.AnswerId">@item.AnswerText</button>   
+        <button class="btn" value="@item.AnswerId">@item.AnswerText</button>   
     }
 
 </div>

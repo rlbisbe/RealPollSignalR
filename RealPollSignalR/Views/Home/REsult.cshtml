@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RealPollSignalR.Models.Question
+@{
     ViewBag.Title = "Votes";
 }
 
@@ -10,8 +11,8 @@
     <script src="~/signalr/hubs"></script>
 
 }
-
 <div class="row" ng-app="myApp" ng-controller="mainController" ng-init="init()">
+    <input type="hidden" id="url" value="@Model.QuestionId"/>
     <div class="col-md-8">
         <h2>Receiving votes..</h2>
         <p id="countdown">{{countdown}}</p>
