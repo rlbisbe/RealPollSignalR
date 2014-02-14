@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RealPollSignalR.Models.Question
+@{
     ViewBag.Title = "Vote for your option";
 }
 
@@ -19,11 +20,11 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Question Title</h2>
+        <h2>@Html.DisplayFor(m => m.QuestionText)</h2>
     </div>
-    <button value="1">Answer 1</button>
-    <button value="2">Answer 2</button>
-    <button value="3">Answer 3</button>
-    <button value="4">Answer 4</button>
+    @foreach (var item in Model.Answers)
+    {
+        <button value="@item.AnswerId">@item.AnswerText</button>   
+    }
 
 </div>
