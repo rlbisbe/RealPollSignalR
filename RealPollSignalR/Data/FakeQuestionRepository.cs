@@ -22,5 +22,17 @@ namespace RealPollSignalR.Data
 
             return question;
         }
+
+
+        public Question Add(Question q)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Question GenerateNewQuestion()
+        {
+            return GetFromId(0);
+        }
     }
 }

@@ -17,6 +17,19 @@ namespace RealPollSignalR.Controllers
             repository = new FakeQuestionRepository();
         }
 
+        public ActionResult Index()
+        {
+            var question = repository.GenerateNewQuestion();
+            return View(question);
+        }
+
+        [HttpPost]
+        public ActionResult Index(Question q)
+        {
+            var added = repository.Add(q);
+            return RedirectToAction("Result", new[] { added.QuestionId });
+        }
+
         public ActionResult Result(int id)
         {
             var question = repository.GetFromId(id);
@@ -31,7 +44,6 @@ namespace RealPollSignalR.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
             return View();
         }
     }

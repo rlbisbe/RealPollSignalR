@@ -1,0 +1,25 @@
+﻿@model IEnumerable<RealPollSignalR.Models.Answer>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AnswerText)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AnswerText)
+        </td>
+        <td>
+            @Html.ActionLink("Set as valid answer", "Edit", new { id=item.AnswerId })
+        </td>
+    </tr>
+}
+
+</table>

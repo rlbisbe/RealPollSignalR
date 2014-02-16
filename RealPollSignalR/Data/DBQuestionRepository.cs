@@ -19,5 +19,21 @@ namespace RealPollSignalR.Data
                 return question;
             }
         }
+
+        public Question Add(Question q)
+        {
+            using (var db = new QuestionContext())
+            {
+                var question = db.Questions.Add(q);
+
+                return question;
+            }
+        }
+
+
+        public Question GenerateNewQuestion()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

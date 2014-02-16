@@ -9,5 +9,9 @@ namespace RealPollSignalR.Data
     public interface IQuestionRepository
     {
         Question GetFromId(int id);
+
+        Question Add(Question q);
+
+        Question GenerateNewQuestion();
     }
 }

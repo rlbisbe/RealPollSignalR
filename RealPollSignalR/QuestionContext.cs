@@ -10,5 +10,7 @@ namespace RealPollSignalR
     public class QuestionContext : DbContext
     {
         public DbSet<Question> Questions { get; set; }
+
+        public System.Data.Entity.DbSet<RealPollSignalR.Models.Answer> Answers { get; set; }
     }
 }
