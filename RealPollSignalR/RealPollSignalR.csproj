@@ -179,6 +179,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Controller\generateController.js" />
     <Content Include="Scripts\Controller\mainController.js" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />
@@ -458,8 +459,9 @@
     <Content Include="Views\Home\Result.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Vote.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Generate.cshtml" />
     <Content Include="Views\Answer\ViewAnswers.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -22,7 +22,7 @@ namespace RealPollSignalR
             routes.MapRoute(
                 name: "Generate",
                 url: "Generate/",
-                defaults: new { controller = "Home", action = "Index" }
+                defaults: new { controller = "Home", action = "Generate" }
             );
 
             routes.MapRoute(
@@ -35,6 +35,12 @@ namespace RealPollSignalR
                 name: "Vote",
                 url: "{id}",
                 defaults: new { controller = "Home", action = "Vote" }
+            );
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

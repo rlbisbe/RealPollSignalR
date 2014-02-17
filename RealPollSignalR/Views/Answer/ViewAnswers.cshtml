@@ -8,16 +8,18 @@
         <th>
             @Html.DisplayNameFor(model => model.AnswerText)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsCorrect)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AnswerText)
+            @Html.EditorFor(modelItem => item.AnswerText)
         </td>
         <td>
-            @Html.ActionLink("Set as valid answer", "Edit", new { id=item.AnswerId })
+            @Html.EditorFor(modelItem => item.IsCorrect)
         </td>
     </tr>
 }

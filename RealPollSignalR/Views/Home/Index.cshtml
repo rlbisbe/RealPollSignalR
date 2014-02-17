@@ -1,47 +1,7 @@
-﻿@model RealPollSignalR.Models.Question
-
+﻿
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Question</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.QuestionText, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.QuestionText)
-                @Html.ValidationMessageFor(model => model.QuestionText)
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => Model.Correct.AnswerText)
-        <table class="table">
-            @for (int i = 0; i < Model.Answers.Count; i++)
-            {
-                 <tr>
-                    <td>
-                        @Html.EditorFor(modelItem => Model.Answers[i].AnswerText)
-                    </td>
-                </tr>
-            }
-        </table>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

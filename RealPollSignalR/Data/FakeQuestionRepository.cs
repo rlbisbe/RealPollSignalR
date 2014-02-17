@@ -17,8 +17,7 @@ namespace RealPollSignalR.Data
             question.Answers.Add(new Answer() { AnswerId = 1, AnswerText = "Foo" });
             question.Answers.Add(new Answer() { AnswerId = 2, AnswerText = "Bar" });
             question.Answers.Add(new Answer() { AnswerId = 4, AnswerText = "Baz" });
-            question.Answers.Add(new Answer() { AnswerId = 7, AnswerText = "Bak" });
-            question.Correct = question.Answers[2];
+            question.Answers.Add(new Answer() { AnswerId = 7, AnswerText = "Bak", IsCorrect = true });
 
             return question;
         }
@@ -32,7 +31,9 @@ namespace RealPollSignalR.Data
 
         public Question GenerateNewQuestion()
         {
-            return GetFromId(0);
+            var q = new Question();
+            q.Answers = new List<Answer>();
+            return GetFromId(9);
         }
     }
 }

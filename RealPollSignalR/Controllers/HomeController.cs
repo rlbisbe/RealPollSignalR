@@ -19,12 +19,18 @@ namespace RealPollSignalR.Controllers
 
         public ActionResult Index()
         {
+            return View();
+        }
+
+
+        public ActionResult Generate()
+        {
             var question = repository.GenerateNewQuestion();
             return View(question);
         }
 
         [HttpPost]
-        public ActionResult Index(Question q)
+        public ActionResult Generate(Question q)
         {
             var added = repository.Add(q);
             return RedirectToAction("Result", new[] { added.QuestionId });

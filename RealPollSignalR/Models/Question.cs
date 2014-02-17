@@ -9,7 +9,7 @@ namespace RealPollSignalR.Models
     public class Question
     {
         public int QuestionId { get; set; }
-        public Answer Correct { get; set; }
+        [Display(Name = "Question text:")]
         public string QuestionText { get; set; }
         public virtual List<Answer> Answers { get; set; }
 
@@ -19,6 +19,9 @@ namespace RealPollSignalR.Models
     {
         public int AnswerId { get; set; }
         public int QuestionId { get; set; }
+        [Display(Name="Answer text")]
         public string AnswerText { get; set; }
+        [Display(Name = "Is Correct?")]
+        public bool IsCorrect { get; set; }
     }
 }
