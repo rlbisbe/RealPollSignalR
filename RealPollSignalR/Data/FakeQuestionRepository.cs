@@ -25,7 +25,8 @@ namespace RealPollSignalR.Data
 
         public Question Add(Question q)
         {
-            throw new NotImplementedException();
+            q.QuestionId = 5;
+            return q;
         }
 
 

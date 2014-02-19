@@ -1,6 +1,4 @@
-﻿using RealPollSignalR.Data;
-using RealPollSignalR.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,47 +8,18 @@ namespace RealPollSignalR.Controllers
 {
     public class HomeController : Controller
     {
-        IQuestionRepository repository;
-
-        public HomeController()
-        {
-            repository = new FakeQuestionRepository();
-        }
-
+        //
+        // GET: /Home/
         public ActionResult Index()
         {
             return View();
         }
 
-
-        public ActionResult Generate()
-        {
-            var question = repository.GenerateNewQuestion();
-            return View(question);
-        }
-
-        [HttpPost]
-        public ActionResult Generate(Question q)
-        {
-            var added = repository.Add(q);
-            return RedirectToAction("Result", new[] { added.QuestionId });
-        }
-
-        public ActionResult Result(int id)
-        {
-            var question = repository.GetFromId(id);
-            return View(question);
-        }
-
-        public ActionResult Vote(int id)
-        {
-            var question = repository.GetFromId(id);
-            return View(question);
-        }
-
+        //
+        // GET: /Home/About
         public ActionResult About()
         {
             return View();
         }
-    }
+	}
 }

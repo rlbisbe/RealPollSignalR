@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Data\DBQuestionRepository.cs" />
     <Compile Include="Data\FakeQuestionRepository.cs" />
     <Compile Include="Data\IQuestionRepository.cs" />
@@ -158,6 +159,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\angles.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -456,10 +458,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Result.cshtml" />
+    <Content Include="Views\Question\Result.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Vote.cshtml" />
-    <Content Include="Views\Home\Generate.cshtml" />
+    <Content Include="Views\Question\Vote.cshtml" />
+    <Content Include="Views\Question\New.cshtml" />
     <Content Include="Views\Answer\ViewAnswers.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>

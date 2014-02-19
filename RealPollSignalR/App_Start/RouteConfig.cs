@@ -14,30 +14,6 @@ namespace RealPollSignalR
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "About",
-                url: "About",
-                defaults: new { controller = "Home", action = "About" }
-            );
-
-            routes.MapRoute(
-                name: "Generate",
-                url: "Generate/",
-                defaults: new { controller = "Home", action = "Generate" }
-            );
-
-            routes.MapRoute(
-                name: "Results",
-                url: "Results/{id}",
-                defaults: new { controller = "Home", action = "Results" }
-            );
-
-            routes.MapRoute(
-                name: "Vote",
-                url: "{id}",
-                defaults: new { controller = "Home", action = "Vote" }
-            );
-
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

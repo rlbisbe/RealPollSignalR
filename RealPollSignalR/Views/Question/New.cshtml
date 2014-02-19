@@ -1,0 +1,64 @@
+﻿@model RealPollSignalR.Models.Question
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Generate new question</h2>
+@section scripts {
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/Controller/generateController.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" ng-app="myApp" ng-controller="generateController">
+        @Html.ValidationSummary(true)
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.LabelFor(model => model.QuestionText)
+                </th>
+                <th>
+                    @Html.EditorFor(model => model.QuestionText)
+                    @Html.ValidationMessageFor(model => model.QuestionText)
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    Number of answers
+                </th>
+                <th>
+                    <input type="text" ng-model="answersCount" /> <input type="button" value="Generate" ng-click="setAnswers()" />
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => new RealPollSignalR.Models.Answer().AnswerText)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => new RealPollSignalR.Models.Answer().IsCorrect)
+                </th>
+            </tr>
+
+            <tr ng-repeat="answer in answers">
+                <td>
+                    <input type="text" id="{{answer.id}}" name="{{answer.name}}" />
+                </td>
+                <td>
+                    <input type="checkbox" id="{{answer.cbId}}" name="{{answer.cbName}}" />
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
