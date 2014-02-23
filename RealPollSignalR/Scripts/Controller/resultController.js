@@ -1,6 +1,19 @@
 ﻿var myApp = angular.module('myApp', ["angles"]);
 
-myApp.controller('mainController', ['$scope', function ($scope) {
+String.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this, 10); // don't forget the second param
+    var hours = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    var time = hours + ':' + minutes + ':' + seconds;
+    return time;
+}
+
+myApp.controller('resultController', ['$scope', "$location", function ($scope, $location) {
 
     var _questionId = parseInt(document.getElementById('url').value);
 
@@ -39,9 +52,19 @@ myApp.controller('mainController', ['$scope', function ($scope) {
     var colors = ["#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360"]
     $scope.myChartData = [];
     $scope.answers = [];
+    $scope.countdownText = "180".toHHMMSS();
     $scope.countdown = 180;
-    $scope.init = function() {
-        console.log("Initializing");
+
+    $scope.init = function () {
+        var hash = parseInt($location.search().time);
+        if (hash) {
+            $scope.countdown = hash;
+            $scope.countdownText = $scope.countdown.toString().toHHMMSS();
+            console.log("Initializing with a countdown of " + $scope.countdown + " seconds");
+        } else {
+            console.log("Initializing with standard 180 seconds countdown");
+        }
+
         var poll = $.connection.poll;
 
         poll.client.castVote = function (name, questionId, option) {
@@ -73,6 +96,7 @@ myApp.controller('mainController', ['$scope', function ($scope) {
 
         timer = setInterval(function () {
             $scope.countdown = $scope.countdown - 1;
+            $scope.countdownText = $scope.countdown.toString().toHHMMSS();
             $scope.$apply();
         }, 1000);
     }
