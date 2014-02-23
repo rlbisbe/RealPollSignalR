@@ -10,29 +10,29 @@ namespace RealPollSignalR.Controllers
 {
     public class QuestionController : Controller
     {
-        IQuestionRepository repository;
+        IQuestionRepository _repository;
 
-        public QuestionController()
+        public QuestionController(IQuestionRepository repository)
         {
-            repository = new FakeQuestionRepository();
+            _repository = repository;
         }
 
         public ActionResult New()
         {
-            var question = repository.GenerateNewQuestion();
+            var question = _repository.GenerateNewQuestion();
             return View(question);
         }
 
         [HttpPost]
         public ActionResult New(Question q)
         {
-            var added = repository.Add(q);
+            var added = _repository.Add(q);
             return RedirectToAction("Result", new { id = added.QuestionId });
         }
 
         public ActionResult Result(int id)
         {
-            var question = repository.GetFromId(id); 
+            var question = _repository.GetFromId(id); 
             if (question == null)
             {
                 return HttpNotFound();
@@ -42,7 +42,7 @@ namespace RealPollSignalR.Controllers
 
         public ActionResult Vote(int id)
         {
-            var question = repository.GetFromId(id);
+            var question = _repository.GetFromId(id);
             if (question == null)
             {
                 return HttpNotFound();

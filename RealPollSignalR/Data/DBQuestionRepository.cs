@@ -33,7 +33,7 @@ namespace RealPollSignalR.Data
 
         public Question GenerateNewQuestion()
         {
-            throw new NotImplementedException();
+            return new Question();
         }
     }
 }

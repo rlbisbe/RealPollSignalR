@@ -3,7 +3,7 @@
 myApp.controller('generateController', ['$scope', function ($scope) {
 
     $scope.answersCount;
-    $scope.answers;
+    $scope.answers = [];
 
     $scope.setAnswers = function ()
     {
@@ -13,7 +13,6 @@ myApp.controller('generateController', ['$scope', function ($scope) {
 
         $scope.answers = [];
         for (var i = 0; i < count; i++) {
-            console.log(i);
             $scope.answers.push({ 
                 id: "Answers_" + i + "__AnswerText",
                 cbId: "Answers_" + i + "__IsCorrect",

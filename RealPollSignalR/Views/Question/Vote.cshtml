@@ -9,25 +9,56 @@
     <script>
         var questionId = '@Model.QuestionId'
         $(function () {
+            $("#thanks").hide();
             var poll = $.connection.poll;
+            var actor;
             $.connection.hub.start().done(function () {
+                
                 $('button').click(function () {
-                    poll.server.vote($("#name").val(), questionId, $(this).val());
+                    actor = this;
+                });
+
+                $("form").submit(function () {
+                    if ($("#name").val().length == 0 || actor == null) {
+                        return;
+                    }
+                    poll.server.vote($("#name").val(), questionId, $(actor).val());
+                    $("#thanks").show();
+                    $("form").hide();
+                    actor = null;
+                    event.preventDefault();
                 });
             });
         });
     </script>
+    <style>
+    .btn-success {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .red {
+        color: red;
+    }
+    </style>
 }
 
 <div class="row">
-    <div class="col-md-4">
+    <form>
         <h2>@Html.DisplayFor(m => m.QuestionText)</h2>
-    </div>
-    <label for="name">Name:</label>
-    <input type="text" required id="name"/>
-    @foreach (var item in Model.Answers)
-    {
-        <button class="btn" value="@item.AnswerId">@item.AnswerText</button>   
-    }
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" class="form-control" required />
+            <span id="error"></span>
+        </div>
 
+        <label for="name">Your answer:</label>
+
+        @foreach (var item in Model.Answers)
+        {
+            <button class="btn btn-success" value="@item.AnswerId">@item.AnswerText</button><br />
+        }
+    </form>
+    <div id="thanks">
+        <h2>Thanks for your vote!</h2>
+    </div>
 </div>

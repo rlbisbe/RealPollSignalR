@@ -17,26 +17,22 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" ng-app="myApp" ng-controller="generateController">
+    <div ng-app="myApp" ng-controller="generateController">
         @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestionText)
+            @Html.TextBoxFor(model => model.QuestionText, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.QuestionText)
+        </div>
+        
+        <div class="form-group">
+            <label>Number of answers:</label>
+            <input type="text" ng-model="answersCount" class="form-control"/> <br/>
+            <input type="button" class="btn btn-success" value="Generate" ng-click="setAnswers()" />
+        </div>
+
         <table class="table">
-            <tr>
-                <th>
-                    @Html.LabelFor(model => model.QuestionText)
-                </th>
-                <th>
-                    @Html.EditorFor(model => model.QuestionText)
-                    @Html.ValidationMessageFor(model => model.QuestionText)
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    Number of answers
-                </th>
-                <th>
-                    <input type="text" ng-model="answersCount" /> <input type="button" value="Generate" ng-click="setAnswers()" />
-                </th>
-            </tr>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => new RealPollSignalR.Models.Answer().AnswerText)
@@ -45,10 +41,10 @@
                     @Html.DisplayNameFor(model => new RealPollSignalR.Models.Answer().IsCorrect)
                 </th>
             </tr>
-
+            
             <tr ng-repeat="answer in answers">
                 <td>
-                    <input type="text" id="{{answer.id}}" name="{{answer.name}}" />
+                    <input type="text" id="{{answer.id}}" name="{{answer.name}}" class="form-control" />
                 </td>
                 <td>
                     <input type="checkbox" id="{{answer.cbId}}" name="{{answer.cbName}}" />
@@ -57,7 +53,7 @@
         </table>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
