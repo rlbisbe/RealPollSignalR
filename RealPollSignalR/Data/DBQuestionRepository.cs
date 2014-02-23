@@ -8,28 +8,32 @@ namespace RealPollSignalR.Data
 {
     public class DBQuestionRepository : IQuestionRepository
     {
+        private QuestionContext _db;
+        public DBQuestionRepository()
+        {
+            _db = new QuestionContext();
+        }
+
         public Question GetFromId(int id)
         {
-            using (var db = new QuestionContext())
-            {
-                var question = (from q in db.Questions
-                                where q.QuestionId == id
-                                select q).FirstOrDefault();
+            var question = from q in _db.Questions
+                           where q.Id == id
+                           select q;
 
-                return question;
-            }
+            return question.FirstOrDefault();
         }
 
         public Question Add(Question q)
         {
-            using (var db = new QuestionContext())
-            {
-                var question = db.Questions.Add(q);
-
+                var question = _db.Questions.Add(q);
+                foreach (var answer in question.Answers)
+                {
+                    answer.QuestionId = question.Id;
+                    _db.Answers.Add(answer);
+                }
+                _db.SaveChanges();
                 return question;
-            }
         }
-
 
         public Question GenerateNewQuestion()
         {

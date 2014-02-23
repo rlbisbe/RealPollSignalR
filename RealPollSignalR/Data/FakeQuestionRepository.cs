@@ -12,12 +12,12 @@ namespace RealPollSignalR.Data
         public Question GetFromId(int id)
         {
             var question = new Question();
-            question.QuestionId = 1;
+            question.Id = 1;
             question.Answers = new List<Answer>();
-            question.Answers.Add(new Answer() { AnswerId = 1, AnswerText = "Foo" });
-            question.Answers.Add(new Answer() { AnswerId = 2, AnswerText = "Bar" });
-            question.Answers.Add(new Answer() { AnswerId = 4, AnswerText = "Baz" });
-            question.Answers.Add(new Answer() { AnswerId = 7, AnswerText = "Bak", IsCorrect = true });
+            question.Answers.Add(new Answer() { Id = 1, AnswerText = "Foo" });
+            question.Answers.Add(new Answer() { Id = 2, AnswerText = "Bar" });
+            question.Answers.Add(new Answer() { Id = 4, AnswerText = "Baz" });
+            question.Answers.Add(new Answer() { Id = 7, AnswerText = "Bak", IsCorrect = true });
 
             return question;
         }
@@ -25,7 +25,7 @@ namespace RealPollSignalR.Data
 
         public Question Add(Question q)
         {
-            q.QuestionId = 5;
+            q.Id = 5;
             return q;
         }
 

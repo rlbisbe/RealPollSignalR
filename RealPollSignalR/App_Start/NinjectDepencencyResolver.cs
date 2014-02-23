@@ -5,10 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using Ninject.Syntax;
-
 namespace RealPollSignalR.App_Start
 {
-    public class NinjectDepencencyResolver : IDependencyResolver
+    public class NinjectDepencencyResolver : Microsoft.AspNet.SignalR.DefaultDependencyResolver, IDependencyResolver 
     {
         private readonly IResolutionRoot _resolutionRoot;
 

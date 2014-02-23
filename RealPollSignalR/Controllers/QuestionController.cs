@@ -27,7 +27,7 @@ namespace RealPollSignalR.Controllers
         public ActionResult New(Question q)
         {
             var added = _repository.Add(q);
-            return RedirectToAction("Result", new { id = added.QuestionId });
+            return RedirectToAction("Result", new { id = added.Id });
         }
 
         public ActionResult Result(int id)

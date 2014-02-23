@@ -7,7 +7,7 @@
     <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>
-        var questionId = '@Model.QuestionId'
+        var questionId = '@Model.Id'
         $(function () {
             $("#thanks").hide();
             var poll = $.connection.poll;
@@ -55,7 +55,7 @@
 
         @foreach (var item in Model.Answers)
         {
-            <button class="btn btn-success" value="@item.AnswerId">@item.AnswerText</button><br />
+            <button class="btn btn-success" value="@item.Id">@item.AnswerText</button><br />
         }
     </form>
     <div id="thanks">

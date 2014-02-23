@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using Microsoft.AspNet.SignalR;
+using Ninject;
 using RealPollSignalR.App_Start;
 using RealPollSignalR.Data;
 using System;
@@ -24,9 +25,12 @@ namespace RealPollSignalR
 
         private void SetupDI()
         {
-            IKernel kernel = new StandardKernel();
-            kernel.Bind<IQuestionRepository>().To<FakeQuestionRepository>();
-            DependencyResolver.SetResolver(new NinjectDepencencyResolver(kernel));
+            var kernel = new StandardKernel();
+            kernel.Bind<IQuestionRepository>().To<DBQuestionRepository>();
+
+            var depencencyResolver = new NinjectDepencencyResolver(kernel);
+            DependencyResolver.SetResolver(depencencyResolver);
+            GlobalHost.DependencyResolver = depencencyResolver;
         }
     }
 }

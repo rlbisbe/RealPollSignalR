@@ -8,7 +8,7 @@ namespace RealPollSignalR.Models
 {
     public class Question
     {
-        public int QuestionId { get; set; }
+        public int Id { get; set; }
         [Display(Name = "Question text:")]
         public string QuestionText { get; set; }
         public virtual List<Answer> Answers { get; set; }
@@ -17,7 +17,7 @@ namespace RealPollSignalR.Models
 
     public class Answer
     {
-        public int AnswerId { get; set; }
+        public int Id { get; set; }
         public int QuestionId { get; set; }
         [Display(Name="Answer text")]
         public string AnswerText { get; set; }
