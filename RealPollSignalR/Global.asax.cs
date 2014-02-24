@@ -25,12 +25,8 @@ namespace RealPollSignalR
 
         private void SetupDI()
         {
-            var kernel = new StandardKernel();
-            kernel.Bind<IQuestionRepository>().To<DBQuestionRepository>();
-
-            var depencencyResolver = new NinjectDepencencyResolver(kernel);
+            var depencencyResolver = new NinjectDepencencyResolver(CurrentKernel.Init());
             DependencyResolver.SetResolver(depencencyResolver);
-            GlobalHost.DependencyResolver = depencencyResolver;
         }
     }
 }

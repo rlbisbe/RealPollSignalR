@@ -8,10 +8,12 @@ namespace RealPollSignalR.Data
 {
     public interface IQuestionRepository
     {
-        Question GetFromId(int id);
+        Question GetFromDisplayHash(int id);
 
         Question Add(Question q);
 
         Question GenerateNewQuestion();
+
+        Question GetFromAdminHash(int id);
     }
 }

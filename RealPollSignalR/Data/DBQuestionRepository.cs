@@ -14,10 +14,19 @@ namespace RealPollSignalR.Data
             _db = new QuestionContext();
         }
 
-        public Question GetFromId(int id)
+        public Question GetFromDisplayHash(int id)
         {
             var question = from q in _db.Questions
-                           where q.Id == id
+                           where q.DisplayHash == id
+                           select q;
+
+            return question.FirstOrDefault();
+        }
+
+        public Question GetFromAdminHash(int id)
+        {
+            var question = from q in _db.Questions
+                           where q.AdminHash == id
                            select q;
 
             return question.FirstOrDefault();

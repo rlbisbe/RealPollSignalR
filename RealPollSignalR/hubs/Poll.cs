@@ -19,7 +19,7 @@ namespace RealPollSignalR
 
         public void Vote(string name, int questionId, int option)
         {
-            Question q = _repository.GetFromId(option);
+            Question q = _repository.GetFromDisplayHash(questionId);
             if (q == null)
             {
                 return;
@@ -27,7 +27,7 @@ namespace RealPollSignalR
 
             var valid = (from a in q.Answers where a.Id == option select a.IsCorrect).FirstOrDefault();
 
-            Clients.All.castVote(name, questionId, valid);
+            Clients.All.castVote(name, questionId, option, valid);
         }
     }
 }

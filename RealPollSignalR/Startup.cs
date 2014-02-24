@@ -12,16 +12,16 @@ namespace RealPollSignalR
     {
         public void Configuration(IAppBuilder app)
         {
-            //Create another dependency resolver that uses the same kernel
 
-            var kernel = new StandardKernel();
-            kernel.Bind<IQuestionRepository>().To<DBQuestionRepository>();
-
-            var depencencyResolver = new NinjectDepencencyResolver(kernel);
-            //GlobalHost.DependencyResolver = new SignalR;
+            var dependencyResolver = new NinjectSignalRDepencencyResolver(CurrentKernel.Init());
+            //GlobalHost.DependencyResolver = dependencyResolver;
 
             // Any connection or hub wire up and configuration should go here
-            app.MapSignalR();
+            app.MapSignalR(new HubConfiguration()
+            {
+                Resolver = dependencyResolver
+            });
+            //app.MapSignalR();
         }
     }
 }

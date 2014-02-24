@@ -7,7 +7,7 @@ using Ninject;
 using Ninject.Syntax;
 namespace RealPollSignalR.App_Start
 {
-    public class NinjectDepencencyResolver : Microsoft.AspNet.SignalR.DefaultDependencyResolver, IDependencyResolver 
+    public class NinjectDepencencyResolver : IDependencyResolver 
     {
         private readonly IResolutionRoot _resolutionRoot;
 

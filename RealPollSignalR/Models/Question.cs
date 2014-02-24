@@ -12,7 +12,8 @@ namespace RealPollSignalR.Models
         [Display(Name = "Question text:")]
         public string QuestionText { get; set; }
         public virtual List<Answer> Answers { get; set; }
-
+        public int AdminHash { get; set; }
+        public int DisplayHash { get; set; }
     }
 
     public class Answer

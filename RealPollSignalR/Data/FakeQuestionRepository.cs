@@ -9,7 +9,7 @@ namespace RealPollSignalR.Data
     public class FakeQuestionRepository : IQuestionRepository
     {
 
-        public Question GetFromId(int id)
+        public Question GetFromDisplayHash(int id)
         {
             var question = new Question();
             question.Id = 1;
@@ -18,10 +18,16 @@ namespace RealPollSignalR.Data
             question.Answers.Add(new Answer() { Id = 2, AnswerText = "Bar" });
             question.Answers.Add(new Answer() { Id = 4, AnswerText = "Baz" });
             question.Answers.Add(new Answer() { Id = 7, AnswerText = "Bak", IsCorrect = true });
+            question.DisplayHash = 123;
+            question.AdminHash = 123;
 
             return question;
         }
 
+        public Question GetFromAdminHash(int id)
+        {
+            return GetFromDisplayHash(9);
+        }
 
         public Question Add(Question q)
         {
@@ -34,7 +40,9 @@ namespace RealPollSignalR.Data
         {
             var q = new Question();
             q.Answers = new List<Answer>();
-            return GetFromId(9);
+            return GetFromDisplayHash(9);
         }
+
+
     }
 }

@@ -67,11 +67,11 @@ myApp.controller('resultController', ['$scope', "$location", function ($scope, $
 
         var poll = $.connection.poll;
 
-        poll.client.castVote = function (name, questionId, option) {
+        poll.client.castVote = function (name, questionId, option, valid) {
             if (questionId != _questionId) 
                 return;
 
-            $scope.answers.push({ name: name, val: option });
+            $scope.answers.push({ name: name, val: option, valid: valid });
             var found = false;
             for (var i in $scope.myChartData) {
                 if ($scope.myChartData[i].option == option) {
