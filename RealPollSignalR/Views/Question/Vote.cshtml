@@ -14,21 +14,19 @@
             var actor;
             $.connection.hub.start().done(function () {
 
-                $('body').on('submit', 'form', function (e) {
-                    return false;
-                });
-
                 $(':submit').click(function () {
                     actor = this;
                 });
 
                 $("#nameForm").submit(function () {
+                    event.preventDefault();
                     $("#nameForm").hide();
                     $("#answerForm").show();
-                    return false;
                 });
 
                 $("#answerForm").submit(function () {
+
+                    event.preventDefault();
                     if ($("#name").val().length == 0 || actor == null) {
                         return;
                     }
@@ -36,7 +34,6 @@
                     $("#thanks").show();
                     $("form").hide();
                     actor = null;
-                    return false;
                 });
             });
         });
