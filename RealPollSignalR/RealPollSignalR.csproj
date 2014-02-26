@@ -489,6 +489,7 @@
     <Content Include="Views\Question\New.cshtml" />
     <Content Include="Views\Answer\ViewAnswers.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Question\Created.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402232204183_Start.resx">

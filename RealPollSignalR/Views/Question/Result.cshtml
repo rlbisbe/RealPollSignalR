@@ -1,0 +1,77 @@
+﻿@model RealPollSignalR.Models.Question
+@{
+    ViewBag.Title = "Votes";
+}
+
+@section scripts {
+
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/Controller/resultController.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"></script>
+    <script src="~/Scripts/angles.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <style>
+        .center {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+
+        .valid {
+            background: green;
+            color: white;
+        }
+
+        table {
+            font-size: large;
+        }
+
+        .result {
+            padding: 10px;
+        }
+    </style>
+}
+<div class="row" ng-app="myApp" ng-controller="resultController" ng-init="init()">
+    <input type="hidden" id="url" value="@Model.Id" />
+    <div class="col-md-4">
+        <h1 ng-class="{hidden: countdown <= 0}">Time left: <span id="countdown">{{countdownText}}</span></h1>
+        <h1 ng-class="{hidden: countdown > 0}">Time is up!</h1>
+
+        <h2 class="center" ng-class="{hidden: answers.length > 0}">No answers yet</h2>
+        <canvas chart type="Pie" options="myChartOptions" data="myChartData" width="300" height="300"></canvas>
+        <table>
+            <tr ng-repeat="answer in answers">
+                <td class="result" ng-class="{valid: countdown <= 0 && answer.valid == true}">{{answer.name}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <h1>Question:</h1>
+        <h1><small>@Model.QuestionText</small></h1>
+        <ul>
+            @foreach (var item in @Model.Answers)
+            {
+                if (item.IsCorrect)
+                {
+                    <li><h2><small class="result" ng-class="{valid: countdown <= 0}">@item.AnswerText</small></h2></li>
+                }
+                else
+                {
+                    <li><h2><small class="result">@item.AnswerText</small></h2></li>
+                }
+            }
+        </ul>
+
+    </div>
+    <div class="col-md-4">
+        <h1>Vote:</h1>
+        <h1><small>By URL:</small></h1>
+        <h2><a href="@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)">@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)</a></h2>
+        <h1><small>Scan and vote with your phone:</small></h1>
+        <img src="http://qrickit.com/api/qr?d='@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)'&qrsize=250&t=p&e=m">
+    </div>
+</div>

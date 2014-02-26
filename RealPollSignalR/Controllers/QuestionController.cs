@@ -34,8 +34,9 @@ namespace RealPollSignalR.Controllers
             q.AdminHash = BitConverter.ToInt16(hashBytes, 8);
 
             var added = _repository.Add(q);
-            return RedirectToAction("Result", new { id = added.Id });
+            return View("Created", added);
         }
+
 
         public ActionResult Result(int id)
         {
@@ -46,6 +47,8 @@ namespace RealPollSignalR.Controllers
             }
             return View(question);
         }
+
+
 
         public ActionResult Vote(int id)
         {

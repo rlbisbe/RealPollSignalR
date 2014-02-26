@@ -1,7 +1,21 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<h2>Realpoll Instructions</h2>
+
+<ol>
+    <h3>
+        <li>Create your question @Html.ActionLink("here", "New", "Question")</li>
+    </h3>
+    <h3>
+        <li>Launch the dashboard (timer will start)</li>
+    </h3>
+    <h3>
+        <li>The public can vote using the QR code or the RAW URL</li>
+    </h3>
+    <h3>
+        <li>When the time is up, the correct answers will display in green</li>
+    </h3>
+</ol>
+<br/>
