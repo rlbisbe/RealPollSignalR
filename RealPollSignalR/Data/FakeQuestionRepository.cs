@@ -13,6 +13,7 @@ namespace RealPollSignalR.Data
         {
             var question = new Question();
             question.Id = 1;
+            question.QuestionText = "What does the fox says?";
             question.Answers = new List<Answer>();
             question.Answers.Add(new Answer() { Id = 1, AnswerText = "Foo" });
             question.Answers.Add(new Answer() { Id = 2, AnswerText = "Bar" });

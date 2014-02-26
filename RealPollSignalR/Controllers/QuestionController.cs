@@ -48,7 +48,15 @@ namespace RealPollSignalR.Controllers
             return View(question);
         }
 
-
+        public ActionResult Created()
+        {
+            var question = _repository.GetFromDisplayHash(2);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View(question);
+        }
 
         public ActionResult Vote(int id)
         {

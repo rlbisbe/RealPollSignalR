@@ -3,7 +3,21 @@
 @{
     ViewBag.Title = "Your question has been created";
 }
+@section scripts {
+    <script>
+        $(document).ready(function () {
 
+            $("#time").submit(function () {
+                var timespan = $("#timespan").val();
+                var parsed = parseInt(timespan);
+                if (parsed > 0) {
+                    document.location = "/Question/@Model.Id#?time=" + timespan;
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
+}
 <h2>Your question has been created</h2>
 
 <div>
@@ -16,8 +30,52 @@
         <dd>
             @Html.DisplayFor(model => model.QuestionText)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Answers):
+        </dt>
+        <dd>
+            <ul>
+                @foreach (var item in Model.Answers)
+                {
+                    <li>
+                        @item.AnswerText
+                        @if (item.IsCorrect)
+                        {
+                            <span> (Correct)</span>
+                        }
+                    </li>
+                }
+            </ul>
+        </dd>
+
     </dl>
-    <input type="submit" value="Create" class="btn btn-primary" />
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Open the dashboard:</h2>
+            @Html.ActionLink("Go to question dashboard", "Result", "Question", Model.Id, new { @class = "btn btn-success" })
+        </div>
+        <div class="col-md-4">
+
+            <h2>Set a specific time:</h2>
+            <form id="time">
+                <div class="form-group">
+                    <label>Time (in seconds):</label>
+                    <input id="timespan" type="text" class="form-control" required /> <br />
+                    <input type="submit" class="btn btn-success" value="Generate" />
+                </div>
+            </form>
+            
+        </div>
+        <div class="col-md-4">
+            <h2>Receive by e-mail:</h2>
+            <div class="form-group">
+                <label>E-mail address:</label>
+                <input type="text" ng-model="answersCount" class="form-control" /> <br />
+                <input type="button" class="btn btn-success" value="Receive by e-mail" ng-click="setAnswers()" />
+            </div>
+        </div>
+    </div>
 </div>
 <p>
 </p>
