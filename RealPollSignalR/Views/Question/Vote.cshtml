@@ -14,6 +14,10 @@
             var actor;
             $.connection.hub.start().done(function () {
 
+                $('body').on('submit', 'form', function (e) {
+                    return false;
+                });
+
                 $(':submit').click(function () {
                     actor = this;
                 });
