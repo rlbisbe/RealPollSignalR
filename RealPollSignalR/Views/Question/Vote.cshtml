@@ -13,12 +13,18 @@
             var poll = $.connection.poll;
             var actor;
             $.connection.hub.start().done(function () {
-                
-                $('button').click(function () {
+
+                $(':submit').click(function () {
                     actor = this;
                 });
 
-                $("form").submit(function () {
+                $("#nameForm").submit(function () {
+                    $("#nameForm").hide();
+                    $("#answerForm").show();
+                    event.preventDefault();
+                });
+
+                $("#answerForm").submit(function () {
                     if ($("#name").val().length == 0 || actor == null) {
                         return;
                     }
@@ -32,33 +38,42 @@
         });
     </script>
     <style>
-    .btn-success {
-        margin-bottom: 10px;
-        width: 100%;
-    }
-    .red {
-        color: red;
-    }
+        .btn-success {
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .red {
+            color: red;
+        }
     </style>
 }
 
 <div class="row">
-    <form>
-        <h2>@Html.DisplayFor(m => m.QuestionText)</h2>
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input id="name" type="text" class="form-control" required />
-            <span id="error"></span>
+    <div class="col-lg-12">
+        <h2>Vote!</h2>
+        <form id="nameForm">
+            <div class="form-group">
+                <label for="name">Your name:</label>
+                <input id="name" type="text" class="form-control" required />
+                <span id="error"></span><br/>
+                <input type="submit" value="Go to question" class="btn btn-primary" />
+            </div>
+        </form>
+        <form id="answerForm" style="display: none">
+            <p><b>@Html.DisplayNameFor(m => m.QuestionText)</b></p>
+            <p>@Html.DisplayFor(m => m.QuestionText)</p>
+            <label for="name">Your answer:</label>
+
+            @foreach (var item in Model.Answers)
+            {
+                <br />
+                <input type="submit" class="btn btn-primary" style="margin-bottom:20px" id="@item.Id" value="@item.AnswerText" />
+            }
+        </form>
+        <div id="thanks" style="display: none">
+            <p>Thanks for your vote!</p>
         </div>
-
-        <label for="name">Your answer:</label>
-
-        @foreach (var item in Model.Answers)
-        {
-            <button class="btn btn-success" value="@item.Id">@item.AnswerText</button><br />
-        }
-    </form>
-    <div id="thanks">
-        <h2>Thanks for your vote!</h2>
     </div>
+
 </div>

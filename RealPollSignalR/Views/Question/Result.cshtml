@@ -70,7 +70,7 @@
     <div class="col-md-4">
         <h1>Vote:</h1>
         <h1><small>By URL:</small></h1>
-        <h2><a style="text-wrap:normal" target="_blank" href="@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)">@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)</a></h2>
+        <p style="font-size:xx-large;  word-wrap: break-word;"><a target="_blank" href="@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)">@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)</a></p>
         <h1><small>Scan and vote with your phone:</small></h1>
         <img src="http://qrickit.com/api/qr?d=@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)&qrsize=250&t=p&e=m">
     </div>
