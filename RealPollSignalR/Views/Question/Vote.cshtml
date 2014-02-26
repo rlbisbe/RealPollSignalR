@@ -21,7 +21,7 @@
                 $("#nameForm").submit(function () {
                     $("#nameForm").hide();
                     $("#answerForm").show();
-                    event.preventDefault();
+                    return false;
                 });
 
                 $("#answerForm").submit(function () {
@@ -32,7 +32,7 @@
                     $("#thanks").show();
                     $("form").hide();
                     actor = null;
-                    event.preventDefault();
+                    return false;
                 });
             });
         });
