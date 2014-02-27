@@ -14,23 +14,28 @@
             var actor;
             $.connection.hub.start().done(function () {
 
-                $(':submit').click(function () {
+                $(':button').click(function () {
                     actor = this;
+                    console.log("hey brother");
                 });
 
                 $("#nameForm").submit(function () {
                     event.preventDefault();
+                    if ($("#name").val().length == 0) {
+                        return;
+                    }
                     $("#nameForm").hide();
                     $("#answerForm").show();
                 });
 
-                $("#answerForm").submit(function () {
-
+                $("#answerForm").click(function () {
+                    console.log("clicked");
                     event.preventDefault();
-                    if ($("#name").val().length == 0 || actor == null) {
+                    if (actor == null) {
+                        console.log("nothing to see here");
                         return;
                     }
-                    poll.server.vote($("#name").val(), questionId, $(actor).val());
+                    poll.server.vote($("#name").val(), questionId, actor.id);
                     $("#thanks").show();
                     $("form").hide();
                     actor = null;
@@ -69,7 +74,7 @@
             @foreach (var item in Model.Answers)
             {
                 <br />
-                <input type="submit" class="btn btn-primary" style="margin-bottom:20px" id="@item.Id" value="@item.AnswerText" />
+                <input type="button" class="btn btn-primary" style="margin-bottom:20px" id="@item.Id" value="@item.AnswerText" />
             }
         </form>
         <div id="thanks" style="display: none">

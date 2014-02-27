@@ -19,6 +19,7 @@ namespace RealPollSignalR
             // Any connection or hub wire up and configuration should go here
             app.MapSignalR(new HubConfiguration()
             {
+                EnableDetailedErrors = true,
                 Resolver = dependencyResolver
             });
             //app.MapSignalR();
