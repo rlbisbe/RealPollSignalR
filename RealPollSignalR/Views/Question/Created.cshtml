@@ -5,16 +5,27 @@
 }
 @section scripts {
     <script>
-        $(document).ready(function () {
+    $(document).ready(function () {
 
-            $("#time").submit(function () {
-                var timespan = $("#timespan").val();
-                var parsed = parseInt(timespan);
-                if (parsed > 0) {
-                    document.location = "/Question/@Model.Id#?time=" + timespan;
+        $("#time").submit(function () {
+            var timespan = $("#timespan").val();
+            var parsed = parseInt(timespan);
+            if (parsed > 0) {
+                document.location = "/Question/@Model.Id#?time=" + timespan;
                 }
                 event.preventDefault();
             });
+
+
+        $("#receiveemail").submit(function () {
+                event.preventDefault();
+                $.post("/Email", { Email: $("#emailaddress").val(), QuestionId: '@Model.Id' }, function (data) {
+                    //do whatever with the response
+                    console.log(data);
+                });
+            });
+
+
         });
     </script>
 }
@@ -65,15 +76,17 @@
                     <input type="submit" class="btn btn-success" value="Generate" />
                 </div>
             </form>
-            
+
         </div>
         <div class="col-md-4">
             <h2>Receive by e-mail:</h2>
-            <div class="form-group">
-                <label>E-mail address:</label>
-                <input type="text" ng-model="answersCount" class="form-control" /> <br />
-                <input type="button" class="btn btn-success" value="Receive by e-mail" ng-click="setAnswers()" />
-            </div>
+            <form id="receiveemail">
+                <div class="form-group">
+                    <label>E-mail address:</label>
+                    <input type="text" id="emailaddress" class="form-control" /> <br />
+                    <input type="submit" class="btn btn-success" value="Receive by e-mail" />
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 ﻿using Ninject;
 using RealPollSignalR.Data;
+using RealPollSignalR.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace RealPollSignalR.App_Start
 
             Current = new StandardKernel();
             Current.Bind<IQuestionRepository>().To<FakeQuestionRepository>();
-
+            Current.Bind<IMailService>().To<MailService>();
             return Current;
         }
     }

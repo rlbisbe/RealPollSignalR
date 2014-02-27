@@ -1,5 +1,7 @@
 ﻿using RealPollSignalR.Data;
 using RealPollSignalR.Models;
+using RealPollSignalR.Services;
+using RealPollSignalR.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +14,12 @@ namespace RealPollSignalR.Controllers
     public class QuestionController : Controller
     {
         IQuestionRepository _repository;
+        IMailService _mailService;
 
-        public QuestionController(IQuestionRepository repository)
+        public QuestionController(IQuestionRepository repository, IMailService service)
         {
             _repository = repository;
+            _mailService = service;
         }
 
         public ActionResult New()
@@ -37,7 +41,6 @@ namespace RealPollSignalR.Controllers
             return View("Created", added);
         }
 
-
         public ActionResult Result(int id)
         {
             var question = _repository.GetFromDisplayHash(id); 
@@ -48,14 +51,23 @@ namespace RealPollSignalR.Controllers
             return View(question);
         }
 
-        public ActionResult Created()
+        public ActionResult Created(int id)
         {
-            var question = _repository.GetFromDisplayHash(2);
+            var question = _repository.GetFromDisplayHash(id);
             if (question == null)
             {
                 return HttpNotFound();
             }
             return View(question);
+        }
+
+        [HttpPost]
+        public string Email(EmailViewModel model)
+        {
+            var question = _repository.GetFromDisplayHash(model.QuestionId);
+            var body = _mailService.GenerateEmailBody(question);
+            _mailService.SendMail(model.Email, body);
+            return "OK";
         }
 
         public ActionResult Vote(int id)

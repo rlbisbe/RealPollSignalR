@@ -20,6 +20,12 @@ namespace RealPollSignalR
            );
 
             routes.MapRoute(
+              name: "Email",
+              url: "Email",
+              defaults: new { controller = "Question", action = "Email" }
+          );
+
+            routes.MapRoute(
                name: "Question",
                url: "Question/{id}",
                defaults: new { controller = "Question", action = "Result" }
@@ -30,6 +36,7 @@ namespace RealPollSignalR
                url: "{id}",
                defaults: new { controller = "Question", action = "Vote" }
            );
+
 
             routes.MapRoute(
                 name: "Default",
