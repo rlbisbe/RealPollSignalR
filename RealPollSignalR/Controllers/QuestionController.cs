@@ -62,12 +62,15 @@ namespace RealPollSignalR.Controllers
         }
 
         [HttpPost]
-        public string Email(EmailViewModel model)
+        public ActionResult Email(EmailViewModel model)
         {
             var question = _repository.GetFromDisplayHash(model.QuestionId);
             var body = _mailService.GenerateEmailBody(question);
-            _mailService.SendMail(model.Email, body);
-            return "OK";
+            if (_mailService.SendMail(model.Email, body, question.DisplayHash))
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
+            }
+            return new HttpStatusCodeResult(System.Net.HttpStatusCode.InternalServerError);
         }
 
         public ActionResult Vote(int id)

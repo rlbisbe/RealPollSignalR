@@ -9,6 +9,6 @@ namespace RealPollSignalR.Services
     public interface IMailService
     {
         string GenerateEmailBody(Question q);
-        void SendMail(string target, string body);
+        bool SendMail(string target, string body, int id);
     }
 }

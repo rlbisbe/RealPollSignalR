@@ -26,6 +26,8 @@ namespace RealPollSignalR.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         QuestionText = c.String(),
+                        AdminHash = c.Int(nullable: false),
+                        DisplayHash = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
