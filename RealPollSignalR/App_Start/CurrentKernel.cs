@@ -21,7 +21,7 @@ namespace RealPollSignalR.App_Start
             }
 
             Current = new StandardKernel();
-            Current.Bind<IQuestionRepository>().To<FakeQuestionRepository>();
+            Current.Bind<IQuestionRepository>().To<DBQuestionRepository>();
             Current.Bind<IMailService>().To<MailService>();
             return Current;
         }
