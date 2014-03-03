@@ -7,7 +7,7 @@
     <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script type="text/javascript">
-        var questionId = '@Model.Id'
+        var questionId = '@Model.DisplayHash';
         $(function () {
             $("#thanks").hide();
             var poll = $.connection.poll;

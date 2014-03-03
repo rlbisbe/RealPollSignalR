@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,7 @@ namespace RealPollSignalR.Models
         public virtual List<Answer> Answers { get; set; }
         public int AdminHash { get; set; }
         public int DisplayHash { get; set; }
+        public Guid QuestionUniqueId { get; set; }
     }
 
     public class Answer

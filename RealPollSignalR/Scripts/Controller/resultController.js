@@ -15,7 +15,7 @@ String.prototype.toHHMMSS = function () {
 
 myApp.controller('resultController', ['$scope', "$location", function ($scope, $location) {
 
-    var _questionId = parseInt(document.getElementById('url').value);
+    var _questionId = parseInt(document.getElementById('hash').value);
 
     $scope.myChartOptions = {
         //Boolean - Whether we should show a stroke on each segment

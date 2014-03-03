@@ -171,6 +171,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="hubs\Poll.cs" />
+    <Compile Include="Migrations\201403031941252_Id.cs" />
+    <Compile Include="Migrations\201403031941252_Id.Designer.cs">
+      <DependentUpon>201403031941252_Id.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201403032151170_201403031941252_Id.cs" />
+    <Compile Include="Migrations\201403032151170_201403031941252_Id.Designer.cs">
+      <DependentUpon>201403032151170_201403031941252_Id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\IMailService.cs" />
     <Compile Include="Migrations\201402232204183_Start.cs" />
@@ -503,6 +511,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201402232204183_Start.resx">
       <DependentUpon>201402232204183_Start.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403031941252_Id.resx">
+      <DependentUpon>201403031941252_Id.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201403032151170_201403031941252_Id.resx">
+      <DependentUpon>201403032151170_201403031941252_Id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

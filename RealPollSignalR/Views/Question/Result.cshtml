@@ -46,7 +46,7 @@
 <h1><strong>Voting dashboard: </strong>@Model.QuestionText</h1>
 
 <div class="row" ng-app="myApp" ng-controller="resultController" ng-init="init()">
-    <input type="hidden" id="url" value="@Model.Id" />
+    <input type="hidden" id="hash" value="@Model.DisplayHash" />
     <div class="col-md-4">
         <h2 ng-class="{hidden: countdown <= 0}">Time left: <span id="countdown">{{countdownText}}</span></h2>
         <h2 ng-class="{hidden: countdown > 0}">Time is up!</h2>
@@ -82,7 +82,9 @@
         <h1><small>By URL:</small></h1>
         <p style="font-size:xx-large;  word-wrap: break-word;"><a target="_blank" href="@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)">@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)</a></p>
         <h1><small>Scan and vote with your phone:</small></h1>
-        <img src="http://qrickit.com/api/qr?d=@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)&qrsize=250&t=p&e=m">
+        <p style="text-align:center">
+            <img src="http://qrickit.com/api/qr?d=@Url.Action("Vote", "Question", new { id = Model.DisplayHash }, this.Request.Url.Scheme)&qrsize=250&t=p&e=m">
+        </p>
         <br/> &nbsp;
     </div>
 </div>

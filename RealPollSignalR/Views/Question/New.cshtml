@@ -21,7 +21,7 @@
 
     <div ng-app="myApp" ng-controller="generateController">
         @Html.ValidationSummary(true)
-
+        @Html.HiddenFor(model => model.QuestionUniqueId);
         <h3>Question information</h3>
         <div class="form-group">
             <label>Write the question here:</label>
