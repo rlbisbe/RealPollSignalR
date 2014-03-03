@@ -4,6 +4,7 @@ using RealPollSignalR.App_Start;
 using RealPollSignalR.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,6 +17,7 @@ namespace RealPollSignalR
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<QuestionContext>(null);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
