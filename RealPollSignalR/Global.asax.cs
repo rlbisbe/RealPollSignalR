@@ -17,7 +17,6 @@ namespace RealPollSignalR
     {
         protected void Application_Start()
         {
-            Database.SetInitializer<QuestionContext>(null);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
