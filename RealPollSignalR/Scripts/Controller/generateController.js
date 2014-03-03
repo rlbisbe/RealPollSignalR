@@ -6,23 +6,22 @@ myApp.controller('generateController', ['$scope', function ($scope) {
     $scope.answers = [];
 
 
-    function addAnswers(toAdd)
+    function addAnswers(base, toAdd)
     {
         for (var i = 0; i < toAdd; i++) {
+            var index = base + i;
             $scope.answers.push({
-                id: "Answers_" + i + "__AnswerText",
-                cbId: "Answers_" + i + "__IsCorrect",
-                name: "Answers[" + i + "].AnswerText",
-                cbName: "Answers[" + i + "].IsCorrect"
+                id: "Answers_" + index + "__AnswerText",
+                cbId: "Answers_" + index + "__IsCorrect",
+                name: "Answers[" + index + "].AnswerText",
+                cbName: "Answers[" + index + "].IsCorrect"
             });
-            $scope.$apply();
         }
     }
 
     function removeAnswers(toRemove) {
         for (var i = 0; i < toRemove; i++) {
             $scope.answers.pop();
-            $scope.$apply();
         }
     }
 
@@ -32,7 +31,7 @@ myApp.controller('generateController', ['$scope', function ($scope) {
         var toModify = count - $scope.answers.length;
 
         if (toModify > 0) {
-            addAnswers(toModify);
+            addAnswers($scope.answers.length, toModify);
         }
         if (toModify < 0) {
             removeAnswers(toModify * -1);

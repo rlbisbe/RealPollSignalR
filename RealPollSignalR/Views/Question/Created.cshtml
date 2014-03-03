@@ -11,7 +11,7 @@
                 var timespan = $("#timespan").val();
                 var parsed = parseInt(timespan);
                 if (parsed > 0) {
-                    document.location = "/Question/@Model.DisplayHash#?time=" + timespan;
+                    document.location = "/Question/@Model.DisplayHash/#?time=" + timespan;
                 }
                 event.preventDefault();
             });
