@@ -4,7 +4,8 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Generate new question</h2>
+<h2>You are creating a new question</h2>
+
 @section scripts {
 
     <script src="~/Scripts/angular.min.js"></script>
@@ -13,6 +14,7 @@
     <script src="~/signalr/hubs"></script>
 
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -20,18 +22,18 @@
     <div ng-app="myApp" ng-controller="generateController">
         @Html.ValidationSummary(true)
 
+        <h3>Question information</h3>
         <div class="form-group">
-            @Html.LabelFor(model => model.QuestionText)
+            <label>Write the question here:</label>
             @Html.TextBoxFor(model => model.QuestionText, new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.QuestionText)
         </div>
         
         <div class="form-group">
-            <label>Number of answers:</label>
-            <input type="text" ng-model="answersCount" class="form-control"/> <br/>
-            <input type="button" class="btn btn-success" value="Generate" ng-click="setAnswers()" />
+            <label>How many possible answers does it have? (maximum 10):</label>
+            <input type="text" ng-model="answersCount" class="form-control" ng-change="setAnswers()"/> <br/>
         </div>
-
+        <h3>Answers</h3>
         <table class="table">
             <tr>
                 <th>

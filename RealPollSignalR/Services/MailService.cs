@@ -15,7 +15,7 @@ namespace RealPollSignalR.Services
         public string GenerateEmailBody(Models.Question q)
         {
             string template = string.Empty;
-            string templatePath = HostingEnvironment.MapPath(@"~/App_Data/PriceModels.xml");
+            string templatePath = HostingEnvironment.MapPath(@"~/App_Data/EmailTemplate.cshtml");
             using (StreamReader reader = new StreamReader(templatePath))
             {
                 template = reader.ReadToEnd();

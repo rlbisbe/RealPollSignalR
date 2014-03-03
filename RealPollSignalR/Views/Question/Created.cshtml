@@ -1,94 +1,126 @@
 ﻿@model RealPollSignalR.Models.Question
 
 @{
-    ViewBag.Title = "Your question has been created";
+    ViewBag.Title = "Question details";
 }
 @section scripts {
     <script>
-    $(document).ready(function () {
+        $(document).ready(function () {
 
-        $("#time").submit(function () {
-            var timespan = $("#timespan").val();
-            var parsed = parseInt(timespan);
-            if (parsed > 0) {
-                document.location = "/Question/@Model.Id#?time=" + timespan;
+            $("#time").submit(function () {
+                var timespan = $("#timespan").val();
+                var parsed = parseInt(timespan);
+                if (parsed > 0) {
+                    document.location = "/Question/@Model.DisplayHash#?time=" + timespan;
                 }
                 event.preventDefault();
             });
 
-
-        $("#receiveemail").submit(function () {
+            $("#receiveemail").submit(function () {
                 event.preventDefault();
-                $.post("/Email", { Email: $("#emailaddress").val(), QuestionId: '@Model.Id' }, function (data) {
-                    //do whatever with the response
-                    console.log(data);
+                $.post("/Email", { Email: $("#emailaddress").val(), QuestionId: '@Model.DisplayHash' }, function (data) {
+                    $("#feedback").show();
+                    $("#feedback").removeClass();
+                    $("#feedback").addClass("alert alert-success");
+                    $("#feedback").html("Email successfully sent");
+                }).fail(function () {
+                    $("#feedback").show();
+                    $("#feedback").removeClass();
+                    $("#feedback").addClass("alert alert-danger");
+                    $("#feedback").html("Error sending e-mail");
                 });
             });
 
 
         });
     </script>
+    <style>
+        #question_info {
+            padding: 1px 15px;
+            color: #3a87ad;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+            border-radius: 4px;
+        }
+
+        h4 {
+            line-height: 20pt;
+        }
+
+        .btn-success {
+            float: left;
+            margin-right: 10px;
+            margin-top: -5px;
+        }
+
+        #feedback {
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
 }
-<h2>Your question has been created</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.QuestionText)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.QuestionText)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Answers):
-        </dt>
-        <dd>
+<br />
+<div class="alert alert-info">Save this URL, is your admin area</div>
+@Html.ActionLink("Go to question dashboard", "Result", "Question", Model.Id, new { @class = "btn btn-success" })
+<h4>Open the question and let the users vote</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <h2>Question details</h2>
+    </div>
+    <div class="col-md-8">
+    <h2>Extra options</h2>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div id="question_info">
+            <h3>Question information:</h3>
+            <h4><strong>Question:</strong> @Html.DisplayFor(model => model.QuestionText)</h4>
+            <h4><strong>Answers:</strong></h4>
             <ul>
                 @foreach (var item in Model.Answers)
                 {
-                    <li>
+                    <h4>
                         @item.AnswerText
                         @if (item.IsCorrect)
                         {
                             <span> (Correct)</span>
                         }
-                    </li>
+                    </h4>
                 }
             </ul>
-        </dd>
-
-    </dl>
-
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Open the dashboard:</h2>
-            @Html.ActionLink("Go to question dashboard", "Result", "Question", Model.Id, new { @class = "btn btn-success" })
         </div>
-        <div class="col-md-4">
+        <hr />
+        <br />&nbsp;
+    </div>
+    <div class="col-md-4">
+        <h3>Dashboard with time:</h3>
+        <h4>Open the question with a specific time and let the users vote</h4>
 
-            <h2>Set a specific time:</h2>
-            <form id="time">
-                <div class="form-group">
-                    <label>Time (in seconds):</label>
-                    <input id="timespan" type="text" class="form-control" required /> <br />
-                    <input type="submit" class="btn btn-success" value="Generate" />
-                </div>
-            </form>
+        <form id="time">
+            <div class="form-group">
+                <label>Time (in seconds):</label>
+                <input id="timespan" type="text" class="form-control" required /> <br />
+                <input type="submit" class="btn btn-primary" value="Go to question dashboard with time" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
 
-        </div>
-        <div class="col-md-4">
-            <h2>Receive by e-mail:</h2>
-            <form id="receiveemail">
-                <div class="form-group">
-                    <label>E-mail address:</label>
-                    <input type="text" id="emailaddress" class="form-control" /> <br />
-                    <input type="submit" class="btn btn-success" value="Receive by e-mail" />
-                </div>
-            </form>
-        </div>
+        <h3>Receive e-mail:</h3>
+        <h4>Get question details (including a link to this page) via e-mail</h4>
+
+        <form id="receiveemail">
+            <div class="form-group">
+                <label>E-mail address:</label>
+                <input type="text" id="emailaddress" class="form-control" /> <br />
+                <input type="submit" class="btn btn-primary" value="Receive by e-mail" />
+                <div id="feedback"></div>
+            </div>
+        </form>
     </div>
 </div>
+
 <p>
 </p>

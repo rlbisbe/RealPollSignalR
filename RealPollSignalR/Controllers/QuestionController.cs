@@ -38,7 +38,7 @@ namespace RealPollSignalR.Controllers
             q.AdminHash = BitConverter.ToInt16(hashBytes, 8);
 
             var added = _repository.Add(q);
-            return View("Created", added);
+            return RedirectToAction("Created", "Question", new { id = added.DisplayHash });
         }
 
         public ActionResult Result(int id)
@@ -64,6 +64,7 @@ namespace RealPollSignalR.Controllers
         [HttpPost]
         public ActionResult Email(EmailViewModel model)
         {
+            return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK); 
             var question = _repository.GetFromDisplayHash(model.QuestionId);
             var body = _mailService.GenerateEmailBody(question);
             if (_mailService.SendMail(model.Email, body, question.DisplayHash))
