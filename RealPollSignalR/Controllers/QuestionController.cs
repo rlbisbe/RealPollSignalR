@@ -58,7 +58,6 @@ namespace RealPollSignalR.Controllers
         [HttpPost]
         public ActionResult Email(EmailViewModel model)
         {
-            return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK); 
             var question = _repository.GetFromDisplayHash(model.QuestionId);
             var body = _mailService.GenerateEmailBody(question);
             if (_mailService.SendMail(model.Email, body, question.DisplayHash))
