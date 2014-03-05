@@ -1,9 +1,11 @@
-﻿using RealPollSignalR.Data;
+﻿using RazorEngine.Templating;
+using RealPollSignalR.Data;
 using RealPollSignalR.Models;
 using RealPollSignalR.Services;
 using RealPollSignalR.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
@@ -59,7 +61,19 @@ namespace RealPollSignalR.Controllers
         public ActionResult Email(EmailViewModel model)
         {
             var question = _repository.GetFromDisplayHash(model.QuestionId);
-            var body = _mailService.GenerateEmailBody(question);
+            var body = string.Empty;
+            try
+            {
+                body = _mailService.GenerateEmailBody(question);
+            }
+            catch (TemplateCompilationException ex)
+            {
+                foreach (var item in ex.Errors)
+	            {
+		            Trace.WriteLine(item.ErrorText);
+	            }
+                throw;
+            }
             if (_mailService.SendMail(model.Email, body, question.DisplayHash))
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
