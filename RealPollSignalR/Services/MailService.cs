@@ -20,7 +20,7 @@ namespace RealPollSignalR.Services
             {
                 template = reader.ReadToEnd();
             }
-            return RazorEngine.Razor.Parse(template, q);
+            return RazorEngine.Razor.Parse<Models.Question>(template, q);
         }
 
         public bool SendMail(string target, string content, int id)

@@ -88,9 +88,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -165,7 +165,6 @@
     <Compile Include="App_Start\NinjectWeb.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AnswerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Data\DBQuestionRepository.cs" />
@@ -502,7 +501,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Question\Vote.cshtml" />
     <Content Include="Views\Question\New.cshtml" />
-    <Content Include="Views\Answer\ViewAnswers.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Question\Created.cshtml" />
     <None Include="Web.Base.config" />

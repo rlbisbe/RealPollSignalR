@@ -9,6 +9,35 @@ namespace RealPollSignalR.Models
 {
     public class Question
     {
+        public Question()
+        {
+
+        }
+
+        public Question(Question question)
+        {
+            Id = question.Id;
+            QuestionText = question.QuestionText;
+            AdminHash = question.AdminHash;
+            DisplayHash = question.DisplayHash;
+            QuestionUniqueId = question.QuestionUniqueId;
+
+            if (question.Answers != null && question.Answers.Count != 0)
+            {
+                Answers = new List<Answer>();
+                foreach (var item in question.Answers)
+                {
+                    Answers.Add(new Answer()
+                    {
+                        AnswerText = item.AnswerText,
+                        Id = item.Id,
+                        IsCorrect = item.IsCorrect,
+                        QuestionId = item.QuestionId
+                    });
+                }
+            }
+        }
+
         public int Id { get; set; }
         [Display(Name = "Question text:")]
         public string QuestionText { get; set; }
@@ -22,7 +51,7 @@ namespace RealPollSignalR.Models
     {
         public int Id { get; set; }
         public int QuestionId { get; set; }
-        [Display(Name="Answer text")]
+        [Display(Name = "Answer text")]
         public string AnswerText { get; set; }
         [Display(Name = "Is Correct?")]
         public bool IsCorrect { get; set; }

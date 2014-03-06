@@ -62,18 +62,8 @@ namespace RealPollSignalR.Controllers
         {
             var question = _repository.GetFromDisplayHash(model.QuestionId);
             var body = string.Empty;
-            try
-            {
-                body = _mailService.GenerateEmailBody(question);
-            }
-            catch (TemplateCompilationException ex)
-            {
-                foreach (var item in ex.Errors)
-	            {
-		            Trace.WriteLine(item.ErrorText);
-	            }
-                throw;
-            }
+            body = _mailService.GenerateEmailBody(new Question(question));
+
             if (_mailService.SendMail(model.Email, body, question.DisplayHash))
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
