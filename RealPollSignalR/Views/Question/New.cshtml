@@ -12,6 +12,7 @@
     <script src="~/Scripts/Controller/generateController.js"></script>
     <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/validation.js"></script>
 
 }
 
@@ -31,10 +32,10 @@
         
         <div class="form-group">
             <label>How many possible answers does it have? (maximum 10):</label>
-            <input type="text" ng-model="answersCount" class="form-control" ng-change="setAnswers()"/> <br/>
+            <input id="answerCount" type="text" ng-model="answersCount" class="form-control" ng-change="setAnswers()"/><span id="errmsg"></span><br/>
         </div>
         <h3>Answers</h3>
-        <table class="table">
+        <table class="table" id="table">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => new RealPollSignalR.Models.Answer().AnswerText)
