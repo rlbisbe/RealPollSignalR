@@ -52,5 +52,11 @@ namespace RealPollSignalR.Data
         {
             return new Question() { QuestionUniqueId = Guid.NewGuid()};
         }
+
+
+        public int GetQuestionCount()
+        {
+            return _db.Questions.Count();
+        }
     }
 }

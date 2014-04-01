@@ -8,14 +8,14 @@ using RealPollSignalR.Data;
 
 namespace RealPollSignalR
 {
-    public class Poll : Hub
-    {
-        IQuestionRepository _repository;
+public class Poll : Hub
+{
+    IQuestionRepository _repository;
 
-        public Poll(IQuestionRepository repository)
-        {
-            _repository = repository;
-        }
+    public Poll(IQuestionRepository repository)
+    {
+        _repository = repository;
+    }
 
         public void Vote(string name, int questionId, int option)
         {

@@ -15,5 +15,7 @@ namespace RealPollSignalR.Data
         Question GenerateNewQuestion();
 
         Question GetFromAdminHash(int id);
+
+        int GetQuestionCount();
     }
 }

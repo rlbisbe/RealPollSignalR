@@ -44,6 +44,9 @@ namespace RealPollSignalR.Data
             return GetFromDisplayHash(9);
         }
 
-
+        public int GetQuestionCount()
+        {
+            return 100;
+        }
     }
 }

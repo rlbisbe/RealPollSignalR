@@ -12,17 +12,13 @@ namespace RealPollSignalR
     {
         public void Configuration(IAppBuilder app)
         {
-
-            var dependencyResolver = new NinjectSignalRDepencencyResolver(CurrentKernel.Init());
-            //GlobalHost.DependencyResolver = dependencyResolver;
-
+            var dependencyResolver = new NinjectSignalRDependencyResolver(CurrentKernel.Init());
             // Any connection or hub wire up and configuration should go here
             app.MapSignalR(new HubConfiguration()
             {
                 EnableDetailedErrors = true,
                 Resolver = dependencyResolver
             });
-            //app.MapSignalR();
         }
     }
 }

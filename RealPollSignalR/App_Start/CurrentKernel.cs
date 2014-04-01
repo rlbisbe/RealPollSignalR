@@ -27,6 +27,10 @@ namespace RealPollSignalR.App_Start
             {
                 Current.Bind<IQuestionRepository>().To<FakeQuestionRepository>();
             }
+            else if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["mongodb:connectionString"]) == false)
+            {
+                Current.Bind<IQuestionRepository>().To<MongoDBQuestionRepository>();
+            }
             else
             {
                 Current.Bind<IQuestionRepository>().To<DBQuestionRepository>();
