@@ -31,6 +31,7 @@ namespace RealPollSignalR.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult New(Question q)
         {
             var added = _repository.Add(q);
