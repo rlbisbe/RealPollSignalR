@@ -30,11 +30,12 @@ myApp.controller('generateController', ['$scope', function ($scope) {
         var count = parseInt($scope.answersCount);
         var toModify = count - $scope.answers.length;
 
-        if (toModify > 0) {
+        if (toModify > 0 && toModify < 10) {
             addAnswers($scope.answers.length, toModify);
         }
-        if (toModify < 0) {
-            removeAnswers(toModify * -1);
+        if (toModify < 0 || toModify >= 10) {
+            var toRemove= toModify >=10 ? toModify : (toModify * -1);
+            removeAnswers(toRemove);
         }
     };
 }]);
