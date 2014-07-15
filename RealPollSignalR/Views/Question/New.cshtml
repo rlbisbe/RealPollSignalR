@@ -9,6 +9,7 @@
 @section scripts {
 
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/Models/AnswerList.js"></script>
     <script src="~/Scripts/Controller/generateController.js"></script>
     <script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
     <script src="~/signalr/hubs"></script>
@@ -29,9 +30,10 @@
             @Html.ValidationMessageFor(model => model.QuestionText)
         </div>
         
-        <div class="form-group">
-            <label>How many possible answers does it have? (maximum 10):</label>
-            <input type="text" ng-model="answersCount" class="form-control" ng-change="setAnswers()"/> <br/>
+        <div class="form-group" ng-class="{'has-error': answerList.isModelValid() == false}">
+            <label for="possibleAnswers">How many possible answers does it have? (maximum 10):</label>
+            <input required type="text" id="possibleAnswers" ng-model="answerList.count" class="form-control" ng-change="setAnswers()" />
+            <label class="control-label" for="possibleAnswers">{{answerList.errorMessage}}</label><br />
         </div>
         <h3>Answers</h3>
         <table class="table">
@@ -46,7 +48,7 @@
             
             <tr ng-repeat="answer in answers">
                 <td>
-                    <input type="text" id="{{answer.id}}" name="{{answer.name}}" class="form-control" />
+                    <input type="text" id="{{answer.id}}" name="{{answer.name}}" required class="form-control" />
                 </td>
                 <td>
                     <input type="checkbox" id="{{answer.cbId}}" name="{{answer.cbName}}" value="true" />

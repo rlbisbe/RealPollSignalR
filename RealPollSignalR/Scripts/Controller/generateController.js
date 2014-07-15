@@ -2,15 +2,13 @@
 
 myApp.controller('generateController', ['$scope', function ($scope) {
 
-    $scope.answersCount;
-    $scope.answers = [];
-
+    $scope.answerList = new AnswerList();
 
     function addAnswers(base, toAdd)
     {
         for (var i = 0; i < toAdd; i++) {
             var index = base + i;
-            $scope.answers.push({
+            $scope.answerList.answers.push({
                 id: "Answers_" + index + "__AnswerText",
                 cbId: "Answers_" + index + "__IsCorrect",
                 name: "Answers[" + index + "].AnswerText",
@@ -21,20 +19,21 @@ myApp.controller('generateController', ['$scope', function ($scope) {
 
     function removeAnswers(toRemove) {
         for (var i = 0; i < toRemove; i++) {
-            $scope.answers.pop();
+            $scope.answerList.answers.pop();
         }
     }
 
     $scope.setAnswers = function ()
     {
-        var count = parseInt($scope.answersCount);
-        var toModify = count - $scope.answers.length;
+        if ($scope.answerList.isModelValid()) {
+            var toModify = $scope.answerList.count - $scope.answerList.answers.length;
 
-        if (toModify > 0) {
-            addAnswers($scope.answers.length, toModify);
-        }
-        if (toModify < 0) {
-            removeAnswers(toModify * -1);
+            if (toModify > 0) {
+                addAnswers($scope.answerList.answers.length, toModify);
+            }
+            if (toModify < 0) {
+                removeAnswers(toModify * -1);
+            }
         }
     };
 }]);
